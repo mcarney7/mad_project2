@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: mad_project2
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
@@ -35,11 +36,31 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+=======
+name: project_2
+description: A modern stock tracking app with Firebase and Finnhub API.
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  firebase_core: ^3.8.1
+  firebase_auth: ^5.3.4
+  cloud_firestore: ^5.5.1
+  http: ^1.2.2
+  provider: ^6.0.5
+  fluttertoast: ^8.2.1
+  google_fonts: ^4.0.4
+  lottie: ^2.3.2
+>>>>>>> 05f790b (project set-up and firebase integration)
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+<<<<<<< HEAD
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -88,3 +109,20 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+=======
+flutter:
+  uses-material-design: true
+
+  fonts:
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Regular.ttf
+        - asset: assets/fonts/Lato-Bold.ttf
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/fonts/
+
+
+>>>>>>> 05f790b (project set-up and firebase integration)

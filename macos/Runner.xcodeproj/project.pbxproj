@@ -21,6 +21,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
+=======
+		0264F207BA0F8F06EE6CFAB1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897192F822CBF1F4C8D07867 /* GoogleService-Info.plist */; };
+>>>>>>> 05f790b (project set-up and firebase integration)
 		331C80D8294CF71000263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C80D7294CF71000263BE5 /* RunnerTests.swift */; };
 		335BBD1B22A9A15E00E9071D /* GeneratedPluginRegistrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BBD1A22A9A15E00E9071D /* GeneratedPluginRegistrant.swift */; };
 		33CC10F12044A3C60003C045 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC10F02044A3C60003C045 /* AppDelegate.swift */; };
@@ -64,7 +68,11 @@
 		331C80D7294CF71000263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		333000ED22D3DE5D00554162 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
 		335BBD1A22A9A15E00E9071D /* GeneratedPluginRegistrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedPluginRegistrant.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		33CC10ED2044A3C60003C045 /* mad_project2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mad_project2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+=======
+		33CC10ED2044A3C60003C045 /* project_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project_2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+>>>>>>> 05f790b (project set-up and firebase integration)
 		33CC10F02044A3C60003C045 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33CC10F22044A3C60003C045 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Runner/Assets.xcassets; sourceTree = "<group>"; };
 		33CC10F52044A3C60003C045 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -77,6 +85,10 @@
 		33E51914231749380026EE4D /* Release.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Release.entitlements; sourceTree = "<group>"; };
 		33E5194F232828860026EE4D /* AppInfo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppInfo.xcconfig; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+<<<<<<< HEAD
+=======
+		897192F822CBF1F4C8D07867 /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/GoogleService-Info.plist"; sourceTree = "<group>"; };
+>>>>>>> 05f790b (project set-up and firebase integration)
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,13 +137,21 @@
 				331C80D6294CF71000263BE5 /* RunnerTests */,
 				33CC10EE2044A3C60003C045 /* Products */,
 				D73912EC22F37F3D000D13A0 /* Frameworks */,
+<<<<<<< HEAD
+=======
+				897192F822CBF1F4C8D07867 /* GoogleService-Info.plist */,
+>>>>>>> 05f790b (project set-up and firebase integration)
 			);
 			sourceTree = "<group>";
 		};
 		33CC10EE2044A3C60003C045 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				33CC10ED2044A3C60003C045 /* mad_project2.app */,
+=======
+				33CC10ED2044A3C60003C045 /* project_2.app */,
+>>>>>>> 05f790b (project set-up and firebase integration)
 				331C80D5294CF71000263BE5 /* RunnerTests.xctest */,
 			);
 			name = Products;
@@ -217,7 +237,11 @@
 			);
 			name = Runner;
 			productName = Runner;
+<<<<<<< HEAD
 			productReference = 33CC10ED2044A3C60003C045 /* mad_project2.app */;
+=======
+			productReference = 33CC10ED2044A3C60003C045 /* project_2.app */;
+>>>>>>> 05f790b (project set-up and firebase integration)
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -285,6 +309,10 @@
 			files = (
 				33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */,
 				33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */,
+<<<<<<< HEAD
+=======
+				0264F207BA0F8F06EE6CFAB1 /* GoogleService-Info.plist in Resources */,
+>>>>>>> 05f790b (project set-up and firebase integration)
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,10 +413,17 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.madProject2.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mad_project2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/mad_project2";
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.project2.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/project_2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/project_2";
+>>>>>>> 05f790b (project set-up and firebase integration)
 			};
 			name = Debug;
 		};
@@ -399,10 +434,17 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.madProject2.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mad_project2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/mad_project2";
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.project2.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/project_2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/project_2";
+>>>>>>> 05f790b (project set-up and firebase integration)
 			};
 			name = Release;
 		};
@@ -413,10 +455,17 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.madProject2.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mad_project2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/mad_project2";
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.project2.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/project_2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/project_2";
+>>>>>>> 05f790b (project set-up and firebase integration)
 			};
 			name = Profile;
 		};

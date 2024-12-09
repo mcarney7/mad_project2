@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
     "name": "mad_project2",
     "short_name": "mad_project2",
+=======
+    "name": "project_2",
+    "short_name": "project_2",
+>>>>>>> 05f790b (project set-up and firebase integration)
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

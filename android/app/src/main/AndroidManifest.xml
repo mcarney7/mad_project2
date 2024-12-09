@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
+<<<<<<< HEAD
         android:label="mad_project2"
+=======
+        android:label="project_2"
+>>>>>>> 05f790b (project set-up and firebase integration)
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

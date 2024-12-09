@@ -27,7 +27,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   FlutterWindow window(project);
   Win32Window::Point origin(10, 10);
   Win32Window::Size size(1280, 720);
+<<<<<<< HEAD
   if (!window.Create(L"mad_project2", origin, size)) {
+=======
+  if (!window.Create(L"project_2", origin, size)) {
+>>>>>>> 05f790b (project set-up and firebase integration)
     return EXIT_FAILURE;
   }
   window.SetQuitOnClose(true);
