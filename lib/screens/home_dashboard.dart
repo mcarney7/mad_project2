@@ -41,7 +41,18 @@ class _HomeDashboardState extends State<HomeDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Dashboard")),
+      appBar: AppBar(
+        title: Text("Dashboard"),
+        leading: TextButton(
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/');
+          },
+          child: Text(
+            "Sign Out",
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
+        ),
+      ),
       body: FutureBuilder<Map<String, dynamic>>(
         future: fetchMarketSummary(),
         builder: (context, snapshot) {
