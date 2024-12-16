@@ -23,6 +23,7 @@ The Stock Tracker App is a user-friendly application designed to simplify stock 
 - **Framework**: Flutter
 - **Backend**: Firebase Authentication and Realtime Database
 - **API**: Alpha Vantage API for real-time stock data and financial news.
+-  Our API may hit its limit when you try to run it if so, go to this website https://www.alphavantage.co/support/#api-key generate your own API KEY, and replace it in the project to run it.  
 
 ## Installation
 
