@@ -5,7 +5,7 @@ import '../utils/constants.dart';
 class ApiService {
   // Fetch stock data
   Future<Map<String, dynamic>> fetchStockData(String symbol) async {
-    final url = "$finnhubBaseUrl/quote?symbol=$symbol&token=$finnhubApiKey";
+    final url = "$alphaVantageBaseUrl/quote?symbol=$symbol&token=$alphaVantageApiKey";
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       return json.decode(response.body);
@@ -16,7 +16,7 @@ class ApiService {
 
   // Fetch news
   Future<List<dynamic>> fetchNews() async {
-    final url = "$finnhubBaseUrl/news?category=general&token=$finnhubApiKey";
+    final url = "$alphaVantageBaseUrl/news?category=general&token=$alphaVantageApiKey";
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       return json.decode(response.body);

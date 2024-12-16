@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../services/api_service.dart'; // Replace with your API service file
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class WatchlistScreen extends StatefulWidget {
   @override
@@ -7,8 +8,8 @@ class WatchlistScreen extends StatefulWidget {
 }
 
 class _WatchlistScreenState extends State<WatchlistScreen> {
-  final ApiService apiService = ApiService();
-  List<String> watchlist = ["AAPL", "GOOGL", "AMZN"]; // Replace with dynamic watchlist source
+  final String alphaVantageApiKey = "KVNECXPCDNDOEBTE";
+  final List<String> watchlist = ["AAPL", "GOOGL", "AMZN"];
   Map<String, Map<String, dynamic>> stockData = {};
   bool isLoading = false;
 
@@ -25,8 +26,24 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
 
     try {
       for (var stock in watchlist) {
-        final data = await apiService.fetchStockData(stock); // Replace with your API fetch method
-        stockData[stock] = data;
+        final response = await http.get(Uri.parse(
+            "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=$stock&apikey=$alphaVantageApiKey"));
+
+        if (response.statusCode == 200) {
+          final decodedData = json.decode(response.body);
+          final quote = decodedData["Global Quote"] ?? {};
+
+          setState(() {
+            stockData[stock] = {
+              "price": double.tryParse(quote["05. price"] ?? "0.0") ?? 0.0,
+              "high": double.tryParse(quote["03. high"] ?? "0.0") ?? 0.0,
+              "low": double.tryParse(quote["04. low"] ?? "0.0") ?? 0.0,
+            };
+          });
+        } else {
+          print("Error fetching data for $stock: ${response.statusCode}");
+          stockData[stock] = {"price": 0.0, "high": 0.0, "low": 0.0};
+        }
       }
     } catch (e) {
       print("Error fetching stock data: $e");
@@ -38,10 +55,12 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
   }
 
   void addStock(String stockSymbol) {
-    setState(() {
-      watchlist.add(stockSymbol.toUpperCase());
-    });
-    fetchWatchlistData();
+    if (!watchlist.contains(stockSymbol)) {
+      setState(() {
+        watchlist.add(stockSymbol.toUpperCase());
+        fetchWatchlistData();
+      });
+    }
   }
 
   void removeStock(String stockSymbol) {
@@ -57,15 +76,15 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Add Stock"),
+          title: const Text("Add Stock"),
           content: TextField(
             controller: stockController,
-            decoration: InputDecoration(hintText: "Enter Stock Symbol (e.g., AAPL)"),
+            decoration: const InputDecoration(hintText: "Enter Stock Symbol (e.g., AAPL)"),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text("Cancel"),
+              child: const Text("Cancel"),
             ),
             TextButton(
               onPressed: () {
@@ -75,7 +94,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                 }
                 Navigator.pop(context);
               },
-              child: Text("Add"),
+              child: const Text("Add"),
             ),
           ],
         );
@@ -87,28 +106,28 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Watchlist"),
+        title: const Text("Watchlist"),
         backgroundColor: Colors.blueAccent,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/home');
           },
         ),
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : watchlist.isEmpty
-              ? Center(child: Text("Your watchlist is empty!"))
+              ? const Center(child: Text("Your watchlist is empty!"))
               : ListView.builder(
-                  padding: EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(15),
                   itemCount: watchlist.length,
                   itemBuilder: (context, index) {
                     final stockSymbol = watchlist[index];
                     final data = stockData[stockSymbol];
 
                     return Card(
-                      margin: EdgeInsets.only(bottom: 15),
+                      margin: const EdgeInsets.only(bottom: 15),
                       elevation: 3,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -118,20 +137,21 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                           backgroundColor: Colors.blueAccent,
                           child: Text(
                             stockSymbol[0],
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ),
                         title: Text(
                           stockSymbol,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         subtitle: data == null
-                            ? Text("Loading...")
+                            ? const Text("Loading...")
                             : Text(
-                                "Price: \$${data['c']} (High: \$${data['h']}, Low: \$${data['l']})",
+                                "Price: \$${data['price'].toStringAsFixed(2)} "
+                                "(High: \$${data['high'].toStringAsFixed(2)}, Low: \$${data['low'].toStringAsFixed(2)})",
                               ),
                         trailing: IconButton(
-                          icon: Icon(Icons.delete, color: Colors.red),
+                          icon: const Icon(Icons.delete, color: Colors.red),
                           onPressed: () => removeStock(stockSymbol),
                         ),
                         onTap: () {
@@ -144,7 +164,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: showAddStockDialog,
         backgroundColor: Colors.blueAccent,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

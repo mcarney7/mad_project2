@@ -16,22 +16,28 @@ dependencies:
   google_fonts: ^4.0.4
   lottie: ^2.3.2
   url_launcher: ^6.1.7
+  fl_chart: ^0.55.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
 
-
 flutter:
   uses-material-design: true
 
- # fonts:
-   # - family: Lato
-    #  fonts:
-     #   - asset: assets/fonts/Lato-Regular.ttf
-      #  - asset: assets/fonts/Lato-Bold.ttf
+# Uncomment and customize fonts if needed
+# fonts:
+#   - family: Lato
+#     fonts:
+#       - asset: assets/fonts/Lato-Regular.ttf
+#       - asset: assets/fonts/Lato-Bold.ttf
 
+dependency_overrides:
+  fl_chart:
+    git:
+      url: https://github.com/imaNNeo/fl_chart.git
+      ref: main
 
 
 

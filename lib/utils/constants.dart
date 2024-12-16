@@ -1,2 +1,3 @@
-const String finnhubApiKey = "ctbk6qpr01qvslquoa7gctbk6qpr01qvslquoa80";
-const String finnhubBaseUrl = "https://finnhub.io/api/v1";
+const String alphaVantageApiKey = "KVNECXPCDNDOEBTE"; // Your Alpha Vantage API Key
+const String alphaVantageBaseUrl = "https://www.alphavantage.co/query";
+

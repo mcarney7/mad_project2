@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../services/api_service.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class HomeDashboard extends StatefulWidget {
   @override
@@ -7,13 +8,52 @@ class HomeDashboard extends StatefulWidget {
 }
 
 class _HomeDashboardState extends State<HomeDashboard> {
-  final ApiService apiService = ApiService();
   int _selectedIndex = 0;
 
   Future<Map<String, dynamic>> fetchMarketSummary() async {
-    final appleData = await apiService.fetchStockData("AAPL");
-    final googleData = await apiService.fetchStockData("GOOGL");
-    return {"AAPL": appleData, "GOOGL": googleData};
+    const String apiKey = "KVNECXPCDNDOEBTE";
+    const String baseUrl = "https://www.alphavantage.co/query";
+
+    try {
+      // Fetch AAPL data
+      final responseAAPL = await http.get(Uri.parse(
+          "$baseUrl?function=GLOBAL_QUOTE&symbol=AAPL&apikey=$apiKey"));
+
+      // Fetch GOOGL data
+      final responseGOOGL = await http.get(Uri.parse(
+          "$baseUrl?function=GLOBAL_QUOTE&symbol=GOOGL&apikey=$apiKey"));
+
+      // Parse responses
+      final appleData = json.decode(responseAAPL.body);
+      final googleData = json.decode(responseGOOGL.body);
+
+      return {
+        "AAPL": {
+          "current": double.tryParse(
+                  appleData["Global Quote"]?["05. price"] ?? "0.0") ??
+              0.0,
+          "previousClose": double.tryParse(
+                  appleData["Global Quote"]?["08. previous close"] ?? "0.0") ??
+              0.0,
+        },
+        "GOOGL": {
+          "current": double.tryParse(
+                  googleData["Global Quote"]?["05. price"] ?? "0.0") ??
+              0.0,
+          "previousClose": double.tryParse(
+                  googleData["Global Quote"]?["08. previous close"] ?? "0.0") ??
+              0.0,
+        },
+      };
+    } catch (e) {
+      print("Error fetching stock data: $e");
+
+      // Return fallback values in case of failure
+      return {
+        "AAPL": {"current": 0.0, "previousClose": 0.0},
+        "GOOGL": {"current": 0.0, "previousClose": 0.0},
+      };
+    }
   }
 
   void _onTabSelected(int index) {
@@ -21,7 +61,6 @@ class _HomeDashboardState extends State<HomeDashboard> {
       _selectedIndex = index;
     });
 
-    // Handle navigation based on selected index
     switch (index) {
       case 0:
         Navigator.pushNamed(context, '/watchlist');
@@ -42,29 +81,33 @@ class _HomeDashboardState extends State<HomeDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dashboard"),
-        leading: TextButton(
+        title: const Text("Dashboard"),
+        backgroundColor: Colors.blueAccent,
+        leading: IconButton(
+          icon: const Icon(Icons.logout),
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/');
           },
-          child: Text(
-            "Sign Out",
-            style: TextStyle(color: Colors.white, fontSize: 16),
-          ),
         ),
       ),
       body: FutureBuilder<Map<String, dynamic>>(
         future: fetchMarketSummary(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
-          if (snapshot.hasError) {
-            return Center(child: Text("Error: ${snapshot.error}"));
+          if (snapshot.hasError || snapshot.data == null || snapshot.data!.isEmpty) {
+            return const Center(
+              child: Text(
+                "Error loading market data.",
+                style: TextStyle(color: Colors.red, fontSize: 18),
+              ),
+            );
           }
+
           final marketSummary = snapshot.data!;
           return Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [Colors.white, Colors.blue.shade100],
@@ -75,49 +118,49 @@ class _HomeDashboardState extends State<HomeDashboard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Hello, Investor!",
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Card(
                   elevation: 5,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Today's Market",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             _StockWidget(
                                 name: "AAPL",
-                                change: marketSummary["AAPL"]["c"].toString(),
-                                isPositive:
-                                    marketSummary["AAPL"]["c"] >= marketSummary["AAPL"]["pc"]),
+                                currentPrice: marketSummary["AAPL"]["current"] ?? 0.0,
+                                previousClose:
+                                    marketSummary["AAPL"]["previousClose"] ?? 0.0),
                             _StockWidget(
                                 name: "GOOGL",
-                                change: marketSummary["GOOGL"]["c"].toString(),
-                                isPositive:
-                                    marketSummary["GOOGL"]["c"] >= marketSummary["GOOGL"]["pc"]),
+                                currentPrice: marketSummary["GOOGL"]["current"] ?? 0.0,
+                                previousClose:
+                                    marketSummary["GOOGL"]["previousClose"] ?? 0.0),
                           ],
                         ),
                       ],
                     ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
               ],
             ),
           );
@@ -129,7 +172,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
         selectedItemColor: Colors.blueAccent,
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.list),
             label: 'Watchlist',
@@ -154,22 +197,35 @@ class _HomeDashboardState extends State<HomeDashboard> {
 
 class _StockWidget extends StatelessWidget {
   final String name;
-  final String change;
-  final bool isPositive;
+  final double currentPrice;
+  final double previousClose;
 
-  _StockWidget({required this.name, required this.change, required this.isPositive});
+  const _StockWidget({
+    required this.name,
+    required this.currentPrice,
+    required this.previousClose,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final isPositive = currentPrice >= previousClose;
     return Column(
       children: [
-        Text(name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         Text(
-          "\$$change",
+          name,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          "\$${currentPrice.toStringAsFixed(2)}",
           style: TextStyle(
             fontSize: 14,
             color: isPositive ? Colors.green : Colors.red,
+            fontWeight: FontWeight.bold,
           ),
+        ),
+        Text(
+          "Prev: \$${previousClose.toStringAsFixed(2)}",
+          style: const TextStyle(fontSize: 12, color: Colors.grey),
         ),
       ],
     );
