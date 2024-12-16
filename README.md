@@ -1,22 +1,4 @@
-<<<<<<< HEAD
-# mad_project2
+The Stock Tracker App simplifies stock monitoring for casual investors and market enthusiasts with its user-friendly interface and real-time updates. It integrates real-time stock data via the Alpha Vantage API, allowing users to track performance through personalized watchlists and detailed price charts. The app also provides a curated financial news feed tailored to the user’s interests, ensuring they stay informed about market trends. Its standout feature, the Community Insights section, fosters collaboration by enabling users to share watchlists, discuss trends and exchange investment ideas. Security and seamless functionality are ensured through Firebase authentication and real-time database management. Built with Flutter for cross-platform development, the app combines modern design with efficient performance. By delivering accurate insights, interactive features, and a vibrant community, the Stock Tracker App redefines stock tracking and management for all users.
 
-A new Flutter project.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# project_2
-
-A new Flutter project.
->>>>>>> 05f790b (project set-up and firebase integration)
+Presentation Youtube link: https://youtu.be/uf5ryxH2CfQ
